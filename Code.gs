@@ -2,6 +2,8 @@ function onOpen() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
   var cell = sheet.getRange('C2');
   sheet.setCurrentCell(cell);
+  // msg
+  Browser.msgBox("Hops & Homes -- Dates & Deadlines Form Creation Suite");
 }
 
 
@@ -59,8 +61,8 @@ function createCalendar() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('calendar');
   var calendarName = sheet.getRange('A2').getValue();
-  var calendar = CalendarApp.createCalendar(calendarName).setTimeZone("America/Denver").setHidden(false);  // Create Calendar with specified name in Denver timezone
-  
+  var calendar = CalendarApp.createCalendar(calendarName).setTimeZone("America/Denver");  // Create Calendar with specified name in Denver timezone
+
   var startRow = 2;  // First row of data to process / exempts header row
   var numRows = sheet.getLastRow();   // Number of rows to process
   var numColumns = sheet.getLastColumn();
