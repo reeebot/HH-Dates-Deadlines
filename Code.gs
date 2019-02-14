@@ -5,6 +5,7 @@ function onOpen() {
 }
 
 
+
 function DivideDates() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('MAIN_FORM'); // apply to sheet name only
@@ -32,10 +33,6 @@ function DivideDates() {
 };
 
 
-function Refresh() {
-  SpreadsheetApp.flush();
-};
-
 
 function Reset() {
   var sheet = SpreadsheetApp.getActive().getSheetByName('input');
@@ -57,11 +54,12 @@ function Reset() {
 }
 
 
+
 function createCalendar() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('calendar');
-  var calendar = CalendarApp.createCalendar(sheet.getRange('A2').getValue());  // Calendar name
-  Logger.log(calendar);
+  var calendarName = sheet.getRange('A2').getValue();
+  var calendar = CalendarApp.createCalendar(calendarName).setTimeZone("America/Denver");  // Create Calendar with specified name in Denver timezone
   
   var startRow = 2;  // First row of data to process / exempts header row
   var numRows = sheet.getLastRow();   // Number of rows to process
@@ -73,22 +71,27 @@ function createCalendar() {
   for (var i = 0; i < data.length; ++i) {
     var row = data[i];  // row of data
     var name = row[1];  // Event Name
-    //var date = new Date(row[2]);  // Event date
-    var fdate = Utilities.formatDate(new Date(row[2]), "GMT-7", "MMMM dd, yyyy HH:mm:ss Z");
+    var fdate = Utilities.formatDate(new Date(row[2]), "America/Denver", "MMMM dd, yyyy HH:mm:ss Z");
     var date = new Date(fdate);
-    Logger.log(fdate)
-    Logger.log(date)
+    
     var event = calendar.createAllDayEvent(name, date);
     event.addPopupReminder(900); // Reminder Popup at 9am day prior
-    
-    
-    // #### TODO #### //
-    // calendar API:
-    // - add to notifications agenda
-    // - override default reminders?
-    
-    
   };
+  
+  // calendar API: add to daily email notifications agenda
+  var notificationArgs = {
+    "notificationSettings": {
+      "notifications": [
+        {
+          "method": "email",
+          "type": "agenda"
+        }
+      ]
+    }
+  }
+  var calendarId = calendar.getId();
+  Calendar.CalendarList.update(notificationArgs, calendarId);
+  
   // msg
   Browser.msgBox("Appointments Added to Calendar");
 };
@@ -98,7 +101,7 @@ function createCalendar() {
 function saveForm() {
   
   // #### TODO #### //
-  // - make a copy of spreadsheet with last name + address in filename
+  // - make a copy of spreadsheet, with last name + address in filename
   
   //var sheet = ss.getSheetByName('Template').copyTo(ss);
   
@@ -107,40 +110,6 @@ function saveForm() {
   // - save report as pdf & jpg
   
 };
-
-
-
-
- 
-/**
- * Lists 10 upcoming events in the user's calendar.
- */
-function listUpcomingEvents() {
-  var calendarId = 'Moser - 7302 Ocean Ridge Street, Wellington, CO 80549';
-  var optionalArgs = {
-    timeMin: (new Date()).toISOString(),
-    showDeleted: false,
-    singleEvents: true,
-    maxResults: 10,
-    orderBy: 'startTime'
-  };
-  var response = Calendar.Events.list(calendarId, optionalArgs);
-  var events = response.items;
-  if (events.length > 0) {
-    for (i = 0; i < events.length; i++) {
-      var event = events[i];
-      var when = event.start.dateTime;
-      if (!when) {
-        when = event.start.date;
-      }
-      Logger.log('%s (%s)', event.summary, when);
-    }
-  } else {
-    Logger.log('No upcoming events found.');
-  }
-}
-
-
 
 
 
