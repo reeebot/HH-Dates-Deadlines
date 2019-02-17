@@ -1,9 +1,9 @@
 function onOpen() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
-  var cell = sheet.getRange('C2');
-  sheet.setCurrentCell(cell);
+  var input = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
+  var startCell = input.getRange('C2');
+  input.setCurrentCell(startCell);
   // msg
-  Browser.msgBox("Hops & Homes -- Dates & Deadlines Form Creation Suite");
+  Browser.msgBox("Welcome to the -- Hops & Homes -- Dates & Deadlines Form Creation Suite");
 }
 
 
@@ -28,10 +28,8 @@ function DivideDates() {
   var lastRowNumPivot = sheetPivot.getLastRow() + 6;
   var lastRowRange = sheet.getRange('A' + lastRowNumPivot + ':L' + lastRowNumPivot).setBorder(false, false, false, false, false, false, "red", SpreadsheetApp.BorderStyle.SOLID_MEDIUM);
 
-  // switch to finished report tab
-  SpreadsheetApp.setActiveSheet(ss.getSheets()[1]);
-  // msg
-  Browser.msgBox("Dates and Deadlines Created Successfully");
+  // save form & export PDF
+  exportPDF();
 };
 
 
@@ -49,8 +47,9 @@ function Reset() {
   var testvalues = sheet.getRange('B1:B48').getValues(); // array of values to be tested (1st column of the range named above)
 
   rows.setBorder(false, false, false, false, false, false, "red", SpreadsheetApp.BorderStyle.SOLID_MEDIUM); // remove existing borders before applying rule below
-  // change sheet to input
-  SpreadsheetApp.setActiveSheet(SpreadsheetApp.getActiveSpreadsheet().getSheets()[0]);
+
+  var input = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
+  input.setCurrentCell(input.getRange('C2'));
   // msg
   Browser.msgBox("Form Has Been Cleared");
 }
@@ -80,7 +79,7 @@ function createCalendar() {
     event.addPopupReminder(900); // Reminder Popup at 9am day prior
   };
   
-  // calendar API: add to daily email notifications agenda
+  // calendarAPI: add calendar to daily email notifications agenda
   var notificationArgs = {
     "notificationSettings": {
       "notifications": [
@@ -97,21 +96,4 @@ function createCalendar() {
   // msg
   Browser.msgBox("Appointments Added to Calendar");
 };
-
-
-
-function saveForm() {
-  
-  // #### TODO #### //
-  // - make a copy of spreadsheet, with last name + address in filename
-  
-  //var sheet = ss.getSheetByName('Template').copyTo(ss);
-  
-  
-  // #### TODO #### //  
-  // - save report as pdf & jpg
-  
-};
-
-
 
