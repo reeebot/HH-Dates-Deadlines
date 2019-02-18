@@ -8,7 +8,7 @@ function onOpen() {
 
 
 
-function DivideDates() {
+function divideDates() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('MAIN_FORM'); // apply to sheet name only
   var rows = sheet.getRange('A10:L48'); // range to apply formatting to
