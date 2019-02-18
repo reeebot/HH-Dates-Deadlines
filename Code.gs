@@ -96,4 +96,3 @@ function createCalendar() {
   // msg
   Browser.msgBox("Appointments Added to Calendar");
 };
-
