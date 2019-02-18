@@ -64,5 +64,5 @@ function exportPDF() {
   var input = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
   input.setCurrentCell(input.getRange('D11'));
   // msg
-  Browser.msgBox("Form & PDF Saved to Google Drive");
+  Browser.msgBox("PDF, JPG, and Form Saved to Google Drive");
 }
