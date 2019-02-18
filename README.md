@@ -24,12 +24,17 @@
     * reminders
     * daily notification agenda
   * save report as pdf & jpg
-    * to-do
     * save pdf to google drive
-    * convert pdf to jpg with prizmdoc api & save to google drive
+    * convert pdf to jpg with convertapi
+    * save jpg to google drive
   * save data to backup folder
-    * to-do
+    * copy form into project folder
   * additional tweaks
     * onOpen
     * msgBox
     * reset button
+  * future updates
+    * send email
+      * html template email
+      * fill email with names & jpg
+      * pdf attachment
