@@ -1,10 +1,11 @@
 # HH - Dates & Deadlines
 ### tool used to input dates & deadlines for a real estate transaction
-#### automatically creates:
-  * custom report
-  * custom google calendar
+#### automatically:
+  * creates custom report
+  * creates custom google calendar
   * saves report to pdf & jpg
   * saves data for future retrieval
+  * sends custom email with jpg & pdf (*to-do*)
 
 
 ## project requirements
