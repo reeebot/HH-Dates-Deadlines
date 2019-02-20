@@ -11,16 +11,16 @@ function onOpen() {
 function divideDates() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('MAIN_FORM'); // apply to sheet name only
-  var rows = sheet.getRange('A10:L48'); // range to apply formatting to
+  var rows = sheet.getRange('A10:L60'); // range to apply formatting to
   var numRows = rows.getNumRows(); // no. of rows in the range named above
-  var testvalues = sheet.getRange('B1:B48').getValues(); // array of values to be tested (1st column of the range named above)
+  var testvalues = sheet.getRange('B1:B60').getValues(); // array of values to be tested (1st column of the range named above)
 
   rows.setBorder(false, false, false, false, false, false, "red", SpreadsheetApp.BorderStyle.SOLID_MEDIUM); // remove existing borders before applying rule below
 
   for (var i = 0; i <= numRows - 1; i++) {
     var n = i + 1;
     if (testvalues[i] > testvalues[i+1]) { // test applied to array of values
-      sheet.getRange('a' + n + ':l' + n).setBorder(true, null, null, null, null, null, "#d7e3c1", SpreadsheetApp.BorderStyle.SOLID_THICK); // format if true
+      sheet.getRange('A' + n + ':L' + n).setBorder(true, null, null, null, null, null, "#d7e3c1", SpreadsheetApp.BorderStyle.SOLID_THICK); // format if true
     };
   };
   // remove last horizontal line
@@ -42,9 +42,9 @@ function Reset() {
   
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('MAIN_FORM'); // apply to sheet name only
-  var rows = sheet.getRange('A10:L48'); // range to apply formatting to
+  var rows = sheet.getRange('A10:L60'); // range to apply formatting to
   var numRows = rows.getNumRows(); // no. of rows in the range named above
-  var testvalues = sheet.getRange('B1:B48').getValues(); // array of values to be tested (1st column of the range named above)
+  var testvalues = sheet.getRange('B1:B60').getValues(); // array of values to be tested (1st column of the range named above)
 
   rows.setBorder(false, false, false, false, false, false, "red", SpreadsheetApp.BorderStyle.SOLID_MEDIUM); // remove existing borders before applying rule below
 
@@ -77,6 +77,7 @@ function createCalendar() {
     
     var event = calendar.createAllDayEvent(name, date);
     event.addPopupReminder(900); // Reminder Popup at 9am day prior
+    Utilities.sleep(1000);
   };
   
   // calendarAPI: add calendar to daily email notifications agenda
@@ -96,3 +97,5 @@ function createCalendar() {
   // msg
   Browser.msgBox("Appointments Added to Calendar");
 };
+
+
