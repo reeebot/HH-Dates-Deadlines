@@ -22,7 +22,7 @@ function exportPDF() {
   var GETparams = {method:"GET",headers:{"authorization":"Bearer "+ ScriptApp.getOAuthToken()}};
   
   // download pdf
-  var GETresponse = UrlFetchApp.fetch(GETurl, GETparams).getBlob().setName(projectName);
+  var GETresponse = UrlFetchApp.fetch(GETurl, GETparams).getBlob().setName(projectName+".pdf");
   // save to drive
   var pdfFile = projectFolder.createFile(GETresponse);
   var pdfBlob = pdfFile.getBlob();  // for conversion to jpg
