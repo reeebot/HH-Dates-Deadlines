@@ -1,4 +1,5 @@
 function exportPDF() {
+  var ui = SpreadsheetApp.getUi()
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var urlID = ss.getId();
   var ssID = DriveApp.getFileById(urlID);
@@ -64,5 +65,5 @@ function exportPDF() {
   var input = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
   input.setCurrentCell(input.getRange('D11'));
   // msg
-  Browser.msgBox("PDF / JPG / Form Saved to Google Drive");
+  ui.alert('Success!', "PDF / JPG / Form Saved to Google Drive", ui.ButtonSet.OK);
 }
