@@ -1,9 +1,10 @@
 function onOpen() {
+  var ui = SpreadsheetApp.getUi()
   var input = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
   var startCell = input.getRange('C2');
   input.setCurrentCell(startCell);
   // msg
-  Browser.msgBox("Welcome to the -- Hops & Homes -- Dates & Deadlines Form Creation Suite");
+  ui.alert("-- Hops & Homes --", "Dates & Deadlines Form Creation Suite", ui.ButtonSet.OK);
 }
 
 
@@ -67,7 +68,7 @@ function Reset() {
     var input = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('input');
     input.setCurrentCell(input.getRange('C2'));
     // msg
-    Browser.msgBox("Form Has Been Cleared");
+    ui.alert('Success!',"Form Has Been Cleared", ui.ButtonSet.OK);
   } else {
     //NO
   }
@@ -120,7 +121,7 @@ function createCalendar() {
     Calendar.CalendarList.update(notificationArgs, calendarId);
     
     // msg
-    Browser.msgBox("Appointments Added to Calendar");
+    ui.alert('Success!', "Appointments Added to Calendar", ui.ButtonSet.OK);
   } else {
     // NO
   }
