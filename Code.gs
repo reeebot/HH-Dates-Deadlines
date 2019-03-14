@@ -103,7 +103,7 @@ function createCalendar() {
       
       var event = calendar.createAllDayEvent(name, date);
       event.addPopupReminder(900); // Reminder Popup at 9am day prior
-      Utilities.sleep(1000);
+      Utilities.sleep(1500);
     };
     
     // calendarAPI: add calendar to daily email notifications agenda
