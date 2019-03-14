@@ -52,6 +52,10 @@ function exportPDF() {
         {
             "Name": "ImageWidth",
             "Value": "1000"
+        },
+        {
+            "Name": "JpgQuality",
+            "Value": "100"
         }
     ]
   };
