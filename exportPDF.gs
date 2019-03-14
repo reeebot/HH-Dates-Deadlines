@@ -5,7 +5,7 @@ function exportPDF() {
   var ssID = DriveApp.getFileById(urlID);
   
   var backupsFolder = DriveApp.getFolderById("13_ozP4EGLMv9ECiafWKhgzBGGHR18M5r"); // backups folder
-  var projectName = ss.getSheetByName('calendar').getRange('A2').getValue(); // project name
+  var projectName = "Dates Deadlines - " + ss.getSheetByName('calendar').getRange('A2').getValue(); // project name
   var projectFolder = backupsFolder.createFolder(projectName); // create project folder
   var backupSS = ssID.makeCopy(projectName, projectFolder); // create spreadsheet backup
   
@@ -40,6 +40,18 @@ function exportPDF() {
                 "Name": projectName + ".pdf",
                 "Data": Utilities.base64Encode(pdfBlob.getBytes())
             }
+        },
+        {
+            "Name": "ScaleImage",
+            "Value": true
+        },
+        {
+            "Name": "ScaleProportions",
+            "Value": true
+        },
+        {
+            "Name": "ImageWidth",
+            "Value": "1000"
         }
     ]
   };
